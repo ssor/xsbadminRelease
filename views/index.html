@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/flot.html -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>支部管理</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="/css/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/sb-admin.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <!-- <link href="css/morris.css" rel="stylesheet"> -->
+    <!-- Custom Fonts -->
+    <link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/js/metisMenu.min.js"></script>
+    <!-- Flot Charts JavaScript -->
+    <!-- // <script src="/js/sb-admin.js"></script> -->
+    <script type="text/javascript">
+    $(function() {
+        $('#side-menu').metisMenu();
+    });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">小书包管理系统</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- /.navbar-top-links -->
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li class="active">
+                                <a href=""><i class="fa fa-bar-chart-o fa-fw"></i> 栏目管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse in">
+                                    <li>
+                                        <a href="" class="active">基本栏目</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li class="active">
+                                <a href="/index/members"><i class="fa fa-table fa-fw"></i> 组织管理 <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse in">
+                                    <li>
+                                        <a href="" class="active">单位管理</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="/index/members" target="frmcontent" class="active">支部管理</a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/panels-wells.html">Panels and Wells</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/buttons.html">Buttons</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/notifications.html">Notifications</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/typography.html">Typography</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/icons.html"> Icons</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/grid.html">Grid</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/flot.html#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/flot.html#">Second Level Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/flot.html#">Second Level Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/flot.html#">Third Level <span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level collapse">
+                                            <li>
+                                                <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/flot.html#">Third Level Item</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/flot.html#">Third Level Item</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/flot.html#">Third Level Item</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/flot.html#">Third Level Item</a>
+                                            </li>
+                                        </ul>
+                                        <!-- /.nav-third-level -->
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/flot.html#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/blank.html">Blank Page</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/login.html">Login Page</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+            </div>
+            <div class="col-md-9">
+                <iframe name="frmcontent" id="frmcontent" src="/index/members" style="width:100%;min-height: 600px;" frameBorder="0" onload="this.height=frmcontent.document.body.scrollHeight" />
+            </div>
+        </div>
+    </div>
+    <div class="flotTip" style="display: none; position: absolute; z-index: 1040; padding: 0.4em 0.6em; border-radius: 0.5em; font-size: 0.8em; border: 1px solid rgb(17, 17, 17); white-space: nowrap; left: 620px; top: 516px; background: rgb(255, 255, 255);"></div>
+</body>
+
+</html>
