@@ -39,6 +39,7 @@
         </thead>
     </table>
     <script type="text/javascript">
+    var group = "{{ .GROUP }}"
     var table = null
     $(function() {
         table = $('#dtProcess').DataTable({
@@ -51,7 +52,7 @@
             "info": false,
             "searching": true,
             "ajax": {
-                "url": "/api/v1/user/users/xsb",
+                "url": "/api/v1/user/users/"+group,
                 "dataSrc": "data"
             },
             "columns": [{
@@ -93,7 +94,7 @@
             alert("请先选择一个用户！")
             return null
         } else {
-            var id = data[0].id
+            var id = data[0].uid
             return id
         }
     }
@@ -106,9 +107,9 @@
             console.log(result)
             if (result == true){
                 $.ajax({
-                    url: '/api/v1/user/remove',
+                    url: '/api/v1/user/remove/'+id,
                     type: 'POST',
-                    data: JSON.stringify({uid: id}),
+                    // data: JSON.stringify({uid: id}),
                     success: function(data) {
                         if (data.code != 0) {
                             $.alert(data.message)
@@ -174,7 +175,7 @@
                 index = 0
             }
             var obj = {
-                group: "xsb",
+                group: group,
                 phone: $("#inputPhone").val(),
                 email: $("#inputEmail").val(),
                 name : $("#inputName").val(),
