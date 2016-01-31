@@ -1,6 +1,6 @@
 #!/bin/bash
 
-psname="xsbadmin_linux64"
+psname="xsbadmin"
 
 echo "PS name is $psname"
 
