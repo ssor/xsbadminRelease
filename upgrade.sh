@@ -18,4 +18,6 @@ fi
 
 git pull
 
-./$psname &
+process_file_name=${psname}"_linux64"
+
+./$process_file_name &
