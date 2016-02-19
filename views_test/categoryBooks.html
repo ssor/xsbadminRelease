@@ -96,7 +96,7 @@
             alert("请先选择一本书！")
             return null
         } else {
-            var id = data[0].id
+            var id = data[0].uid
             return id
         }
     }
@@ -107,7 +107,7 @@
             alert("请先选择要移除的书！")
             return null
         }
-        var books = _.map(data, "id")
+        var books = _.map(data, "uid")
 
         var obj = {
             books: books,
@@ -213,7 +213,7 @@
                 alert("请先选择要添加的书！")
                 return null
             }
-            var books = _.map(data, "id")
+            var books = _.map(data, "uid")
 
             var obj = {
                 books: books,
