@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>添加任务</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/dataTable/css/jquery.dataTables.css" rel="stylesheet" media="screen">
+    <link href="/css/theme.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+
+    </style>
+    <script src="/js/jquery.js" type="text/javascript"></script>
+    <script src="/js/lodash.min.js" type="text/javascript"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/dataTable/js/jquery.dataTables.js"></script>
+    <script src="/js/tools.js" type="text/javascript"></script>
+</head>
+
+<body style="margin-right:5px;">
+    <div>
+        <div class="main_page_title">添加任务</div>
+        <div class="demo-info">
+            <div></div>
+        </div>
+    </div>
+    <form style="margin-bottom:20px;">
+        <div class="form-group">
+            <label for="inputEmail">任务名称：</label>
+            <input type="text" class="form-control" id="inputName" placeholder="任务名称">
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">任务描述：</label>
+            <textarea id="inputDescription" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">开始时间：</label>
+            <input type="date" class="form-control" id="inputStartTime" placeholder="任务名称">
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">结束时间：</label>
+            <input type="date" class="form-control" id="inputEndTime" placeholder="任务名称">
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">图书列表：</label>
+            <select multiple class="form-control" id="inputBookList">
+            </select>
+
+            <button type="button" class="btn btn-info" onclick="showAddModal()">添加图书</button>
+            <button type="button" class="btn btn-danger" onclick="removeBook()">移除图书</button>
+
+        </div>
+    </form>
+    <button type="button" class="btn btn-primary" onclick="addTask()">添加</button>
+    <script type="text/javascript">
+    function removeBook(){
+        $("#inputBookList option:selected").remove()
+    }
+
+    function addTask() {
+        var taskName = $("#inputName").val()
+        if (taskName == null || taskName.length <= 0) {
+            alert("需要提供公告名称")
+            return
+        }
+        
+        var description = $("#inputDescription").val()
+
+        var startTime = $("#inputStartTime").val()
+        if(startTime.length <= 0){
+            alert("需要设定任务开始时间")
+             return
+        }
+
+        var endTime = $("#inputEndTime").val()
+        if(endTime.length <= 0){
+            alert("需要设定任务结束时间")
+             return
+        }
+
+        var options = $("#inputBookList option")
+        var books = _.map(options, function(option){
+            return option.value
+        })
+
+        var obj = {
+            name: taskName,
+            description: description,
+            company: "{{ .COMPANY }}",
+            startTime: startTime,
+            endTime: endTime,
+            books: books,
+        }
+        console.log(obj)
+        // return
+        $.ajax({
+            url: '/api/v1/task/add',
+            type: 'POST',
+            contentType: "application/json;charset=UTF-8",
+            data: JSON.stringify(obj),
+            success: function(data) {
+                if (data.code == 0) {
+                    window.self.location.href = "/tasks/{{ .COMPANY }}"
+                } else {
+                    alert(data.message)
+                }
+            }
+        });
+    }
+    function showAddModal() {
+        $("#myModal").modal("show")
+    }
+
+    </script>
+    <div class="description">
+        <h3>说明</h3>
+        <p></p>
+    </div>
+    <!-- Modal-->
+    <div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 id="myModalLabel" class="modal-title">向任务添加图书</h4>
+                </div>
+                <div class="modal-body">
+                    <table id="dtProcess2" class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>创建时间</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="addBook()">添加</button>
+                    <button type="button" class="btn btn-default" onclick="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+        var file_id;
+        var table2
+        $('#myModal').on('shown.bs.modal', function(e) {
+            table2 = $('#dtProcess2').DataTable({
+                "columnDefs": [],
+                "paging": false,
+                "ordering": true,
+                "order": [
+                    [0, "asc"]
+                ],
+                "info": false,
+                "searching": true,
+                "ajax": {
+                    "url": "/api/v1/book/booksViewedByCompany/{{ .COMPANY }}",
+                    "dataSrc": "data"
+                },
+                "columns": [{
+                    "data": "name",
+                    "width": "60%"
+                }, {
+                    "data": "createTime",
+                    "width": "40%"
+                }]
+            });
+
+            $('#dtProcess2 tbody').on('click', 'tr', function() {
+                //可以选中多行
+                $(this).toggleClass('selected');
+            });
+        })
+        $('#myModal').on('hide.bs.modal', function(e) {
+            destroyTable2()
+        })
+
+        function cancel() {
+            $("#myModal").modal("hide")
+        }
+
+        function destroyTable2() {
+            if (table2 != null) {
+                table2.destroy()
+                table2 = null
+            }
+        }
+
+        function addBook() {
+            var data = table2.rows(".selected").data()
+            if (data.length <= 0) {
+                alert("请先选择要添加的书！")
+                return null
+            }
+            $("#myModal").modal("hide")
+
+            var books = _.map(data, function(row){
+                return {id: row.uid, name: row.name}
+            })
+
+            console.log(books)
+            _.each(books, function(book){
+                $("#inputBookList").append("<option value='"+ book.id +"'>"+ book.name +"</option>"); 
+            })
+        }
+        </script>
+    </div>
+</body>
+
+</html>

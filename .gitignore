@@ -1,0 +1,14 @@
+#.gitignore
+.DS_Store
+
+files/**/*.*
+
+!files/**/empty
+
+!files/articles/covers/default_article_cover.png
+!files/avatars/default_avatar.png
+!files/books/covers/default_book_cover.png
+!files/categoryCovers/default_cover.png
+!files/news/covers/default_news_cover.png
+!files/notice/covers/default_notice_cover.png
+
