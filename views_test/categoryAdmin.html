@@ -112,7 +112,8 @@
     }
 
     function showAddModal() {
-        $("#modalAdd").modal("show")
+        // $("#modalAdd").modal("show")
+        window.self.top.location = "/admin/addCategory?type={{ .TYPE }}"
     }
 
     function setCategoryToCompany() {
