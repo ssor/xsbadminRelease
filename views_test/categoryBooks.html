@@ -54,7 +54,7 @@
             "info": false,
             "searching": true,
             "ajax": {
-                "url": "/api/v1/book/booksInCategory/" + category,
+                "url": "/api/v1/book/booksInCategory/{{ .COMPANY }}/" + category,
                 "dataSrc": "data"
             },
             "columns": [{
@@ -175,7 +175,7 @@
                 "info": false,
                 "searching": true,
                 "ajax": {
-                    "url": "/api/v1/book/booksInCategory/" + category + "?in=false",
+                    "url": "/api/v1/book/booksInCategory/{{ .COMPANY }}/" + category + "?in=false",
                     "dataSrc": "data"
                 },
                 "columns": [{

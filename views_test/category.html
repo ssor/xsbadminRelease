@@ -89,7 +89,7 @@
         var id = getSelectedID()
         if (id != null) {
             console.log("manageBooks -> category selected ", id)
-            window.self.location.href = "/categoryBooks/"+id
+            window.self.location.href = "/categoryBooks/{{ .COMPANY }}/"+id
         }else{
             console.warn("manageBooks -> no category selected")
         }
