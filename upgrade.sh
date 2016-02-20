@@ -20,4 +20,4 @@ git pull
 
 process_file_name=${psname}"_linux64"
 
-./$process_file_name &
+nohup ./$process_file_name &
