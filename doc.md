@@ -12,6 +12,10 @@ BOYD example:
 
 其中 account 表示用户账号，可能为手机号或者邮箱账号；device 为手机设备唯一码；code 是验证码，暂时使用上面的默认验证码；password 表示新设置的用户密码
 
+#发送验证码
+GET api/v1/user/sendVericationCode/:phone
+
+
 
 #用户登录
 
@@ -24,3 +28,23 @@ BOYD example:
 其中 account 表示用户账号，可能为手机号或者邮箱账号；device 为手机设备唯一码
 
 
+#公告
+
+GET api/v1/notice/newestNotices/:company?last=:para
+
+获取最新的公告
+company: 单位的 ID
+para: 上次请求的最新的公告的 ID，默认值 0
+
+
+#新闻
+
+GET api/v1/news/newestNews/:company?last=:para
+
+获取最新的新闻
+company: 单位的 ID
+para: 上次请求的最新的新闻的 ID，默认值 0
+
+wc -l
+
+sed -i '1,Nd'

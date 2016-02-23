@@ -46,7 +46,7 @@
     $(function() {
         table = $('#dtProcess').DataTable({
             "columnDefs": [],
-            "paging": false,
+            "paging": true,
             "ordering": true,
             "order": [
                 [0, "asc"]
@@ -164,6 +164,7 @@
         <script type="text/javascript">
         var file_id;
         var table2
+
         $('#myModal').on('shown.bs.modal', function(e) {
             table2 = $('#dtProcess2').DataTable({
                 "columnDefs": [],
@@ -188,6 +189,7 @@
             });
 
             $('#dtProcess2 tbody').on('click', 'tr', function() {
+                console.log("selected")
                 //可以选中多行
                 $(this).toggleClass('selected');
             });
@@ -202,6 +204,7 @@
 
         function destroyTable2() {
             if (table2 != null) {
+                $('#dtProcess2 tbody').off('click')
                 table2.destroy()
                 table2 = null
             }

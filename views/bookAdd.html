@@ -17,79 +17,92 @@
 </head>
 
 <body style="margin-right:5px;">
-    <div>
-        <div class="main_page_title">添加图书</div>
-        <div class="demo-info">
-            <div></div>
-        </div>
+    <div class="page-header">图书录入</div>
+
+    <ul class="nav nav-tabs">
+       <li class="active"><a href="#singlebook" data-toggle="tab">单个录入</a></li>
+       <li class=""><a href="#batchofbooks" data-toggle="tab">批量录入</a></li>
+    </ul>
+ 
+    <div class="tab-content">
+      <div class="tab-pane in active" id="singlebook">
+        <form>
+            <br>
+            <div class="form-group">
+                <label for="inputEmail">图书名称：</label>
+                <input type="text" class="form-control" id="inputName" placeholder="图书名称">
+            </div>
+            
+            <div class="form-group">
+                <label for="inputEmail">出版社：</label>
+                <input type="text" class="form-control" id="inputPublisher" placeholder="出版社">
+            </div>
+            
+            <div class="form-group">
+                <label for="inputEmail">出版时间：</label>
+                <input type="date" class="form-control" id="inputPublishTime" placeholder="任务名称">
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail">ISBN：</label>
+                <input type="text" class="form-control" id="inputISBN" placeholder="出版社">
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail">作者：</label>
+                <input type="text" class="form-control" id="inputAuthor" placeholder="出版社">
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail">简介：</label>
+                <input type="text" class="form-control" id="inputInstruction" placeholder="出版社">
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail">章节目录：</label>
+                <input type="text" class="form-control" id="inputNavigation" placeholder="出版社">
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail">封面：</label>
+                <div id="uploader-demo">
+                    <!--用来存放item-->
+                    <div id="imageFileList" class="uploader-list"></div>
+                    <div id="imagePicker">选择图片</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail">上架时间：</label>
+                <input type="date" class="form-control" id="inputAddTime" placeholder="任务名称">
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail">下架时间：</label>
+                <input type="date" class="form-control" id="inputEndTime" placeholder="任务名称">
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail">上传图书文件：</label>
+                <input type="text" class="form-control" id="inputFileName" placeholder="文件名称" disabled>
+                <div id="uploader" class="wu-example">
+                    <div id="filePicker" style="padding-top:5px;">选择上传的图书文件</div>
+                </div>
+            </div>
+            <p id="uploaderTip" class="bg-danger hidden" style="color:red;">文件上传失败</p>
+
+        </form>
+
+        <button type="button" class="btn btn-primary" onclick="addBook()">添加</button>
+
+      </div>
+
+      <div class="tab-pane" id="batchofbooks">
+        <br>Coming soon...
+      </div>
+
     </div>
-    <form>
-        <div class="form-group">
-            <label for="inputEmail">图书名称：</label>
-            <input type="text" class="form-control" id="inputName" placeholder="图书名称">
-        </div>
-        
-        <div class="form-group">
-            <label for="inputEmail">出版社：</label>
-            <input type="text" class="form-control" id="inputPublisher" placeholder="出版社">
-        </div>
-        
-        <div class="form-group">
-            <label for="inputEmail">出版时间：</label>
-            <input type="date" class="form-control" id="inputPublishTime" placeholder="任务名称">
-        </div>
 
-        <div class="form-group">
-            <label for="inputEmail">ISBN：</label>
-            <input type="text" class="form-control" id="inputISBN" placeholder="出版社">
-        </div>
-
-        <div class="form-group">
-            <label for="inputEmail">作者：</label>
-            <input type="text" class="form-control" id="inputAuthor" placeholder="出版社">
-        </div>
-
-        <div class="form-group">
-            <label for="inputEmail">简介：</label>
-            <input type="text" class="form-control" id="inputInstruction" placeholder="出版社">
-        </div>
-
-        <div class="form-group">
-            <label for="inputEmail">章节目录：</label>
-            <input type="text" class="form-control" id="inputNavigation" placeholder="出版社">
-        </div>
-
-        <div class="form-group">
-            <label for="inputEmail">封面：</label>
-            <div id="uploader-demo">
-                <!--用来存放item-->
-                <div id="imageFileList" class="uploader-list"></div>
-                <div id="imagePicker">选择图片</div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="inputEmail">上架时间：</label>
-            <input type="date" class="form-control" id="inputAddTime" placeholder="任务名称">
-        </div>
-
-        <div class="form-group">
-            <label for="inputEmail">下架时间：</label>
-            <input type="date" class="form-control" id="inputEndTime" placeholder="任务名称">
-        </div>
-
-        <div class="form-group">
-            <label for="inputEmail">上传图书文件：</label>
-            <input type="text" class="form-control" id="inputFileName" placeholder="文件名称" disabled>
-            <div id="uploader" class="wu-example">
-                <div id="filePicker" style="padding-top:5px;">选择上传的图书文件</div>
-            </div>
-        </div>
-        <p id="uploaderTip" class="bg-danger hidden" style="color:red;">文件上传失败</p>
-
-    </form>
-
-    <button type="button" class="btn btn-primary" onclick="addBook()">添加</button>
     <script type="text/javascript">
     var file_id, image_id;
     var img_uploader, file_uploader;
@@ -295,10 +308,6 @@
         });
     }
     </script>
-    <div class="description">
-        <h3>说明</h3>
-        <p></p>
-    </div>
 </body>
 
 </html>
