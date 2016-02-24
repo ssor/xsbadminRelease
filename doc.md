@@ -45,6 +45,19 @@ GET api/v1/news/newestNews/:company?last=:para
 company: 单位的 ID
 para: 上次请求的最新的新闻的 ID，默认值 0
 
+#任务
+
+GET api/v1/task/allTasksForCompany/:company?expired=true&limited=true
+获取一个单位的所有任务，包括上级布置的任务
+
+当 expired 设置为空，不限制过期与否
+当 expired 设置为 true，获取所有过期任务
+当 expired 设置为 false，获取所有未过期任务
+
+当 limited 设置为空，不限制限时和非限时任务
+当 limited 设置为 true，获取的任务均为限时任务
+当 limited 设置为 false，获取的任务均为非限时任务
+
 wc -l
 
 sed -i '1,Nd'
