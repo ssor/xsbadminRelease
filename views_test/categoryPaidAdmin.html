@@ -111,7 +111,7 @@
 
     function showAddModal() {
         // $("#modalAdd").modal("show")
-        window.self.top.location = "/admin/addCategory?type={{ .TYPE }}"
+        window.self.location.href = "/admin/addCategory?type={{ .TYPE }}"
     }
 
     function setCategoryToCompany() {
@@ -269,7 +269,7 @@
                 "info": false,
                 "searching": true,
                 "ajax": {
-                    "url": "/api/v1/company/companiesOfAuthorization?authorized=0&category="+category_id,
+                    "url": "/api/v1/company/companiesOfAuthorization?authorized=false&category="+category_id,
                     "dataSrc": "data"
                 },
                 "columns": [{
@@ -322,7 +322,7 @@
                 data: JSON.stringify(obj),
                 success: function(data) {
                     if (data.code == 0) {
-                        refresh_grid()
+                        // refresh_grid()
                     } else {
                         alert(data.message)
                     }

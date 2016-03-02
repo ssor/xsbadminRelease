@@ -69,7 +69,7 @@
             data: JSON.stringify(obj),
             success: function(data) {
                 if (data.code == 0) {
-                    window.self.location.href = "/admin/articles"
+                    window.self.location.href = "/articles/{{ .COMPANY }}"
                 } else {
                     alert(data.message)
                 }

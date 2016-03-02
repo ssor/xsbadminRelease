@@ -28,6 +28,7 @@
         <!-- <a href="javascript:void(0);" onclick="showAddModal()" class="btn  btn-success" style="width:100px;  margin-top: 40px; margin-left: 8px;">增加</a> -->
         <!-- <a href="javascript:void(0);" onclick="deleteItem()" class="btn  btn-danger" style="width:100px;  margin-top: 40px; margin-left: 8px;">删除</a> -->
         <a href="javascript:void(0);" onclick="manageBooks()" class="btn  btn-info" style="width:100px;  margin-top: 40px; margin-left: 8px;">管理图书</a>
+        <a href="javascript:void(0);" onclick="manageArticles()" class="btn  btn-info" style="width:100px;  margin-top: 40px; margin-left: 8px;">管理文章</a>
     </div>
     <div style="border-bottom: solid 1px rgba(200,200,200,0.1); margin-top: 5px;margin-bottom:3px;"></div>
     <table id="dtProcess" class="display" cellspacing="0" width="100%">
@@ -84,6 +85,16 @@
             // $(this).toggleClass('selected');
         });
     })
+
+    function manageArticles(){
+        var id = getSelectedID()
+        if (id != null) {
+            console.log("manageArticles -> category selected ", id)
+            window.self.location.href = "/categoryArticles/{{ .COMPANY }}/"+id
+        }else{
+            console.warn("manageArticles -> no category selected")
+        }
+    }
 
     function manageBooks(){
         var id = getSelectedID()

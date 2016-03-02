@@ -14,6 +14,7 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/dataTable/js/jquery.dataTables.js"></script>
     <script src="/js/tools.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/cookie-tools.js"></script>
 </head>
 
 <body style="margin-right:5px;">
@@ -30,11 +31,10 @@
             vertical-align:middle；
           }
         </style>
-        <table class="table" cellspacing="0" width="100%">
+        <table id="dtProcess" class="table" cellspacing="0" width="100%">
           <thead>
             <tr>
               <th style="width:10%">选择</th>
-              <th style="width:10%">序号</th>
               <th style="width:10%">封面</th>
               <th style="width:40%">文章名称</th>
               <th style="width:10%">作者</th>
@@ -42,63 +42,94 @@
               <th style="width:10%">上传时间</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><input type="checkbox"/></td>
-              <td>1</td>
-              <td><img class="img-repositive" src="/img/default_avatar.png" style="max-height: 60px"></td>
-              <td>习近平总书记系列重要讲话读本</td>
-              <td>习近平</td>
-              <td>人民出版社</td>
-              <td>2016-01-01</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"/></td>
-              <td>2</td>
-              <td><img class="img-repositive" src="/img/default_avatar.png" style="max-height: 60px"></td>
-              <td>XXXXXX</td>
-              <td>习近平</td>
-              <td>人民出版社</td>
-              <td>2016-01-01</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"/></td>
-              <td>3</td>
-              <td><img class="img-repositive" src="/img/default_avatar.png" style="max-height: 60px"></td>
-              <td>XXXXXX</td>
-              <td>习近平</td>
-              <td>人民出版社</td>
-              <td>2016-01-01</td>
-            </tr>
-          </tbody>
         </table>
-
-        <nav>
-          <!--todo 根据实际情况显示真实的页数-->
-          <ul class="pagination">
-            <li>
-              <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-              <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+    <script type="text/javascript">
+        var company = getCookieValueEscaped('name');
+        var cmpid = getCookieValue('id');
+        var table = null
+        $(function() {
+            table = $('#dtProcess').DataTable({
+                "oLanguage": {
+                    "sLengthMenu": "每页显示 _MENU_ 条记录",
+                    "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                    "sInfoEmpty": "没有数据",
+                    "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                    "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "前一页",
+                        "sNext": "后一页",
+                        "sLast": "尾页"
+                    },
+                    "sZeroRecords": "没有检索到数据"
+                },
+                "bPaginate": true,
+                "bLengthChange":false,
+                "ordering": false,
+                "info": true,
+                "searching": true,
+                "ajax": {
+                    "url": "/api/v1/article/articlesInCategory/" + cmpid + "/{{ .CATEGORY }}?in=false",
+                    "dataSrc": "data"
+                },
+                "columns": [{
+                    "data": "uid"
+                }, {
+                    "data": "coverImage"
+                }, {
+                    "data": "name"
+                }, {
+                    "data": "author"
+                }, {
+                    "data": "publisher"
+                }, {
+                    "data": "createTime"
+                }]
+                ,
+                "columnDefs": [
+                    {
+                      "targets": [0],
+                      //"data": "coverImage",
+                      "render": function(data, type, full) {
+                        return "<input type='checkbox' value='" + data + "' />";
+                      }
+                    },
+                    {
+                      "targets": [1],
+                      //"data": "coverImage",
+                      "render": function(data, type, full) {
+                        return "<img class='img-repositive' style='max-height:60px' src='" + data + "' />";
+                      }
+                    }
+                ]
+            });
+        })
+    </script>
       </div>
       <div>
-        <button type="button" class="btn btn-success" onclick="">添加</button>&nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="history.back(-1)">返回</button>
+        <button type="button" class="btn btn-success" onclick="addToCategory()">添加</button>&nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="history.back(-1)">返回</button>
       </div>
     </form>
-
+    <script type="text/javascript">
+      function addToCategory() {
+        var obj = {
+            articles: "articleName",
+            category: "{{ .CATEGORY }}"
+        }
+        $.ajax({
+            url: '/api/v1/article/addCategory',
+            type: 'POST',
+            contentType: "application/json;charset=UTF-8",
+            data: JSON.stringify(obj),
+            success: function(data) {
+                if (data.code == 0) {
+                    window.self.location.href = "/articles/{{ .COMPANY }}"
+                } else {
+                    alert(data.message)
+                }
+            }
+         });
+      }
+    </script>
 </body>
 
 </html>

@@ -124,7 +124,7 @@
                 data: JSON.stringify(obj),
                 success: function(data) {
                     if (data.code != 0) {
-                        $.alert(data.message)
+                        alert(data.message)
                     } else {
                         refresh_grid()
                     }

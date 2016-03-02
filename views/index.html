@@ -15,6 +15,8 @@
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
     <link href="/css/sticky-footer.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/js.cookie.js"></script>
+    <script type="text/javascript" src="/js/cookie-tools.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -48,7 +50,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;超级管理员<a class="navbar-link" href="#" style="color: #FFFFFF" target="_self">欢迎您，XXX</a>
               <!--todo 根据不同的用户，显示不同的等级及用户名-->
             </li>
-            <li><br><a class="navbar-link" href="/login" style="color: #FFFFFF" target="_self" onclick="javascript:location.replace(this.href); event.returnValue=false;">退出</a></li>
+            <li><br><a class="navbar-link" href="/login" style="color: #FFFFFF" target="_self" onclick="javascript:Cookies.remove('name');location.replace(this.href); event.returnValue=false;">退出</a></li>
           </ul>
         </div>
       </div>
@@ -129,7 +131,6 @@
             <li><a href="">终端问题</a></li>
           </ul>
         </div>
-
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="overflow:hidden">
           <div style="margin:0px;padding: 0px; height: 500px;">

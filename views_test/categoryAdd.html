@@ -187,11 +187,14 @@
             data: JSON.stringify(obj),
             success: function(data) {
                 if (data.code == 0) {
-                    window.self.location.href = "/admin/categories?type={{ .TYPE }}"
+                    if("{{ .TYPE }}" == "0"){
+                        window.self.location.href = "/admin/freeCategories"
+                    }else{
+                        window.self.location.href = "/admin/paidCategories"
+                    }
                 } else {
                     alert(data.message)
                 }
-                cancel()
             }
         });
     }

@@ -17,6 +17,8 @@
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/sticky-footer.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/js.cookie.js"></script>
+    <script type="text/javascript" src="/js/cookie-tools.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -25,7 +27,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body onload="checkstatus()">
 
     <nav class="navbar navbar-inverse navbar-fixed-top"  style="background:#FFFFFF; color:#FF0000;height: 66px;max-height: 66px">
       <div class="container-fluid">
@@ -51,7 +53,7 @@
           </td>
           <td>
             <!--todo 提交至？-->
-            <form role="login" action="/company/abc" method="get" style="width: 50%">
+            <form role="login" method="get" style="width: 50%">
             <div class="panel" style="padding-left: 10%;padding-right: 10%">
               <br />
               登录
@@ -71,7 +73,7 @@
                 <span class="input-group-addon">13 + 12</span><!--todo 验证码插件-->
               </div>
               <br>
-              <button type="submit" class="btn btn-danger" style="width:80px">登录</button>
+              <button type="submit" class="btn btn-danger" style="width:80px" onClick="login()">登录</button>
               <a href="">忘记密码?</a><!--todo 忘记密码流程-->
               <br />
               <br />
@@ -81,6 +83,21 @@
          </tr>
       </table>
     </div>
+    <script type="text/javascript">
+      function checkstatus() {
+        var name = getCookieValueEscaped('name');
+        if (name != null) {
+          window.location = '/company/' + name;
+        }
+      }
+      function login() {
+        //todo 
+        var name = "abc";
+        setCookieValueEscaped('name', name);
+        setCookieValue('id', '1456125527');
+        window.location = '/company/' + name;
+      }
+    </script>
 
     <footer class="footer">
       <div class="container">
